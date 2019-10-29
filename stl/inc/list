@@ -332,7 +332,7 @@ struct _List_node { // list node
 };
 
 template <class _Ty>
-struct _List_simple_types : public _Simple_types<_Ty> {
+struct _List_simple_types : _Simple_types<_Ty> {
     using _Node    = _List_node<_Ty, void*>;
     using _Nodeptr = _Node*;
 };
@@ -565,8 +565,8 @@ public:
             break;
         }
 
-        auto _Mid        = _Sort(_First, _Size >> 1, _Pred);
-        const auto _Last = _Sort(_Mid, _Size - (_Size >> 1), _Pred);
+        auto _Mid        = _Sort(_First, _Size / 2, _Pred);
+        const auto _Last = _Sort(_Mid, _Size - _Size / 2, _Pred);
         _First           = _Merge_same(_First, _Mid, _Last, _Pred);
         return _Last;
     }
